@@ -1,0 +1,7 @@
+
+# Project settings
+/.idea/
+/.vscode/
+
+# Vendor
+node_modules
