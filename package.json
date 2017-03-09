@@ -23,10 +23,10 @@
     },
     "homepage": "https://github.com/m-adamski/node-http-server#readme",
     "devDependencies": {
-        "@types/hapi": "^16.0.0",
         "typescript": "^2.2.1"
     },
     "dependencies": {
+        "@types/hapi": "^16.0.0",
         "boom": "^4.2.0",
         "hapi": "^16.1.0"
     }
