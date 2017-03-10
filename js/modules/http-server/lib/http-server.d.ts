@@ -1,10 +1,12 @@
 import * as Hapi from "hapi";
+import {Debug} from "../../debug/lib/debug";
 
 export class HttpServer {
-    protected hapiConfig: Hapi.IServerConnectionOptions;
-    protected hapiServer: Hapi.Server;
+    protected _hapiConfig: Hapi.IServerConnectionOptions;
+    protected _hapiServer: Hapi.Server;
 
     constructor(hapiConfig?: Hapi.IServerConnectionOptions);
-    registerRoute(hapiRoute: Hapi.IRouteConfiguration): void
-    startServer(): void;
+    public debugService(value: Debug): void;
+    public registerRoute(hapiRoute: Hapi.IRouteConfiguration): void;
+    public startServer(): void;
 }

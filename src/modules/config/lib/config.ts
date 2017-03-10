@@ -3,8 +3,9 @@ import * as Yaml from "js-yaml"
 
 export class Config {
 
-    protected configFile: string;
-    protected configContent: Object;
+    protected _configFile: string;
+    protected _configContent: Object;
+    protected _configBranchesSeparator: string = ".";
 
     /**
      * Create instance of Config.
@@ -12,8 +13,8 @@ export class Config {
      * @param configFile
      */
     constructor(configFile: string) {
-        this.configFile = configFile;
-        this.configContent = this.readConfig(configFile);
+        this._configFile = configFile;
+        this._configContent = this.readConfig(configFile);
     }
 
     /**
@@ -31,7 +32,7 @@ export class Config {
         } else {
 
             // Return all config items
-            return this.configContent;
+            return this._configContent;
         }
     }
 
@@ -39,7 +40,7 @@ export class Config {
      * Function check if specified item exist.
      *
      * @param $propertyPath
-     * @return {any}
+     * @return {boolean}
      */
     public has($propertyPath: string): boolean {
         return this.readProperty($propertyPath, true);
@@ -66,15 +67,15 @@ export class Config {
      *
      * @param $propertyPath
      * @param $returnBool
-     * @return {boolean}
+     * @return {any}
      */
     private readProperty($propertyPath: string, $returnBool?: boolean): any {
 
         let returnBool = $returnBool || false;
 
         // Cut specified $propertyPath by dot
-        let propertyPathArray: Array<string> = $propertyPath.split('.');
-        let currentProperty: any = this.configContent;
+        let propertyPathArray: Array<string> = $propertyPath.split(this._configBranchesSeparator);
+        let currentProperty: any = this._configContent;
 
         // If propertyPathArray length is bigger than zero then move every branch
         if (propertyPathArray.length > 0) {
@@ -95,7 +96,7 @@ export class Config {
      * Read Config File and return Content.
      *
      * @param configFile
-     * @return {IConfig}
+     * @return {Object}
      */
     private readConfig(configFile: string): Object {
 

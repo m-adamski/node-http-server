@@ -24,16 +24,16 @@
     },
     "homepage": "https://github.com/m-adamski/node-http-server#readme",
     "devDependencies": {
-        "@types/boom": "^0.0.33",
-        "@types/hapi": "^16.0.0",
-        "@types/js-yaml": "^3.5.29",
-        "@types/node": "^7.0.8",
-        "@types/winston": "^2.2.0",
         "ts-loader": "^2.0.1",
         "typescript": "^2.2.1",
         "webpack": "^2.2.1"
     },
     "dependencies": {
+        "@types/boom": "^0.0.33",
+        "@types/hapi": "^16.0.0",
+        "@types/js-yaml": "^3.5.29",
+        "@types/node": "^7.0.8",
+        "@types/winston": "^2.2.0",
         "boom": "^4.2.0",
         "fs": "^0.0.1-security",
         "hapi": "^16.1.0",

@@ -2,15 +2,16 @@ import * as Fs from "fs";
 import * as Yaml from "js-yaml";
 export class Config {
     constructor(configFile) {
-        this.configFile = configFile;
-        this.configContent = this.readConfig(configFile);
+        this._configBranchesSeparator = ".";
+        this._configFile = configFile;
+        this._configContent = this.readConfig(configFile);
     }
     get($propertyPath) {
         if ($propertyPath) {
             return this.readProperty($propertyPath);
         }
         else {
-            return this.configContent;
+            return this._configContent;
         }
     }
     has($propertyPath) {
@@ -24,8 +25,8 @@ export class Config {
     }
     readProperty($propertyPath, $returnBool) {
         let returnBool = $returnBool || false;
-        let propertyPathArray = $propertyPath.split('.');
-        let currentProperty = this.configContent;
+        let propertyPathArray = $propertyPath.split(this._configBranchesSeparator);
+        let currentProperty = this._configContent;
         if (propertyPathArray.length > 0) {
             propertyPathArray.forEach((propertyBranch) => {
                 try {
