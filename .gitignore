@@ -5,3 +5,7 @@
 
 # Vendor
 node_modules
+
+# Application
+/src/app/
+/dist/

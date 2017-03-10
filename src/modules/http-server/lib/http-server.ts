@@ -1,4 +1,4 @@
-import { Server, Request, IServerConnectionOptions, IRouteConfiguration } from "hapi";
+import {Server, Request, IServerConnectionOptions, IRouteConfiguration} from "hapi";
 
 export class HttpServer {
 
@@ -66,7 +66,7 @@ export class HttpServer {
 
         let matchStatus = false;
         if (!Array.isArray(hapiRoute.method)) {
-            matchStatus = (this.hapiServer.match(hapiRoute.method, hapiRoute.path) == null) ? false : true;
+            matchStatus = (this.hapiServer.match(hapiRoute.method, hapiRoute.path) == null);
         } else {
 
             hapiRoute.method.forEach((method) => {
