@@ -4,7 +4,7 @@ import {Debug} from "../../debug/lib/debug";
 export class HttpServer {
 
     protected _hapiServer: Hapi.Server;
-    private _debugService: Debug;
+    protected _debugService: Debug;
 
     /**
      * Create instance of HttpServer.
@@ -46,7 +46,7 @@ export class HttpServer {
 
         let matchStatus = false;
         if (!Array.isArray(hapiRoute.method)) {
-            matchStatus = (this._hapiServer.match(hapiRoute.method, hapiRoute.path) == null);
+            matchStatus = (this._hapiServer.match(hapiRoute.method, hapiRoute.path) != null);
         } else {
 
             hapiRoute.method.forEach((method) => {
@@ -96,7 +96,7 @@ export class HttpServer {
 
         // Define Route Event Listener
         hapiServer.on('route', (route) => {
-            this.logMessage('info', `New request: New route added: [${route.method.toUpperCase()}] ${route.path}`);
+            this.logMessage('info', `New route added: [${route.method.toUpperCase()}] ${route.path}`);
         });
 
         // Define Request Error Event Listener

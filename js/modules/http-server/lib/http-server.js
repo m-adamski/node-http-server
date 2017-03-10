@@ -17,7 +17,7 @@ export class HttpServer {
     registerRoute(hapiRoute) {
         let matchStatus = false;
         if (!Array.isArray(hapiRoute.method)) {
-            matchStatus = (this._hapiServer.match(hapiRoute.method, hapiRoute.path) == null);
+            matchStatus = (this._hapiServer.match(hapiRoute.method, hapiRoute.path) != null);
         }
         else {
             hapiRoute.method.forEach((method) => {
@@ -45,7 +45,7 @@ export class HttpServer {
             this.logMessage('info', `New request: [${request.info.remoteAddress}] [${request.method.toUpperCase()}] ${request.path}`);
         });
         hapiServer.on('route', (route) => {
-            this.logMessage('info', `New request: New route added: [${route.method.toUpperCase()}] ${route.path}`);
+            this.logMessage('info', `New route added: [${route.method.toUpperCase()}] ${route.path}`);
         });
         hapiServer.on('request-error', (request, err) => {
             this.logMessage('error', `Error response (500) sent for request: [${request.info.remoteAddress}] [${request.method.toUpperCase()}] ${request.path} because: ${err.message}`);
