@@ -21,7 +21,7 @@ export class Debug {
      * @param transporter
      * @param transporterConfig
      */
-    public addTransporter(transporter: Winston.TransportInstance, transporterConfig: Winston.TransportOptions): void {
+    public addTransporter(transporter: Winston.TransportInstance, transporterConfig?: Winston.TransportOptions): void {
         this.winstonLogger.add(transporter, transporterConfig);
     }
 

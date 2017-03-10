@@ -1,68 +1,57 @@
-import {Server, Request, IServerConnectionOptions, IRouteConfiguration} from "hapi";
+import * as Hapi from "hapi";
 
 export class HttpServer {
 
-    protected hapiConfig: IServerConnectionOptions;
-    protected hapiServer: Server;
+    protected hapiConfig: Hapi.IServerConnectionOptions;
+    protected hapiServer: Hapi.Server;
 
     /**
-     * Creates an instance of Http.
+     * Create instance of HttpServer.
      *
-     * @param {IServerConnectionOptions} [hapiConfig]
-     *
-     * @memberOf Http
+     * @param hapiConfig
      */
-    constructor(hapiConfig?: IServerConnectionOptions) {
+    constructor(hapiConfig?: Hapi.IServerConnectionOptions) {
         this.hapiConfig = hapiConfig;
         this.hapiServer = this.initHapi(hapiConfig);
     }
 
     /**
-     * Init Hapi Server.
+     * Init HTTP Server.
      *
-     * @private
-     * @param {IServerConnectionOptions} hapiConfig
-     * @returns {Server}
-     *
-     * @memberOf Http
+     * @param hapiConfig
+     * @return {Server}
      */
-    private initHapi(hapiConfig: IServerConnectionOptions): Server {
+    private initHapi(hapiConfig: Hapi.IServerConnectionOptions): Hapi.Server {
 
         // Init Hapi Server
-        let hapiServer = new Server();
+        let hapiServer = new Hapi.Server();
         hapiServer.connection(hapiConfig);
 
         // Define Hapi Event Listeners
-        hapiServer.on("request", (request: Request) => {
-            console.log("Request");
+        hapiServer.on("request", (request: Hapi.Request) => {
+            console.log(request);
         });
 
         return hapiServer;
     }
 
     /**
-     * Run Hapi Server.
-     *
-     * @memberOf Http
+     * Run HTTP Server.
      */
     public startServer(): void {
         this.hapiServer.start((error) => {
             if (error) {
                 throw error;
             }
-
-            // LogService.logInfo(`Server running at: ${this.hapiServer.info.uri}`, 'Hapi');
         });
     }
 
     /**
      * Register Route.
      *
-     * @param {IRouteConfiguration} hapiRoute
-     *
-     * @memberOf Http
+     * @param hapiRoute
      */
-    public registerRoute(hapiRoute: IRouteConfiguration): void {
+    public registerRoute(hapiRoute: Hapi.IRouteConfiguration): void {
 
         let matchStatus = false;
         if (!Array.isArray(hapiRoute.method)) {
@@ -79,8 +68,6 @@ export class HttpServer {
 
         if (!matchStatus) {
             this.hapiServer.route(hapiRoute);
-        } else {
-            // LogService.logError(`Route [${$hapiRoute.method}] ${$hapiRoute.path} is already registered`, 'Hapi');
         }
     }
 }

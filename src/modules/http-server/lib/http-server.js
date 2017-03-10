@@ -1,14 +1,14 @@
-import { Server } from "hapi";
+import * as Hapi from "hapi";
 export class HttpServer {
     constructor(hapiConfig) {
         this.hapiConfig = hapiConfig;
         this.hapiServer = this.initHapi(hapiConfig);
     }
     initHapi(hapiConfig) {
-        let hapiServer = new Server();
+        let hapiServer = new Hapi.Server();
         hapiServer.connection(hapiConfig);
         hapiServer.on("request", (request) => {
-            console.log("Request");
+            console.log(request);
         });
         return hapiServer;
     }
@@ -22,7 +22,7 @@ export class HttpServer {
     registerRoute(hapiRoute) {
         let matchStatus = false;
         if (!Array.isArray(hapiRoute.method)) {
-            matchStatus = (this.hapiServer.match(hapiRoute.method, hapiRoute.path) == null) ? false : true;
+            matchStatus = (this.hapiServer.match(hapiRoute.method, hapiRoute.path) == null);
         }
         else {
             hapiRoute.method.forEach((method) => {
@@ -34,8 +34,6 @@ export class HttpServer {
         }
         if (!matchStatus) {
             this.hapiServer.route(hapiRoute);
-        }
-        else {
         }
     }
 }
