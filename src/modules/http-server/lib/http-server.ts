@@ -4,10 +4,13 @@ import {Route} from "../../router/lib/route";
 import {HttpServerConfig} from "./http-server-config";
 import {Config} from "../../config/lib/config";
 import {Router} from "../../router/lib/router";
+import {HttpServerTokenAuth} from "./http-server-auth";
+import {AuthProvider} from "../../../providers/auth-provider";
 
 export class HttpServer {
 
     protected _hapiServer: Hapi.Server;
+    private _authProvider: AuthProvider;
     private _debugService: Debug;
     private _configService: Config;
     private _routerService: Router;
@@ -16,15 +19,17 @@ export class HttpServer {
      * Create instance of HttpServer.
      *
      * @param httpServerConfig
+     * @param authProvider;
      * @param debugService
      * @param configService
      */
-    constructor(httpServerConfig: HttpServerConfig, debugService: Debug, configService: Config) {
+    constructor(httpServerConfig: HttpServerConfig, authProvider: AuthProvider, debugService: Debug, configService: Config) {
 
         // Init Hapi Server
         this._hapiServer = this.initHapi(httpServerConfig);
 
         // Assign variables
+        this._authProvider = authProvider;
         this._debugService = debugService;
         this._configService = configService;
 
@@ -92,6 +97,12 @@ export class HttpServer {
         // Init Hapi Server
         let hapiServer = new Hapi.Server();
         hapiServer.connection(httpServerConfig);
+
+        // Register additional module
+        // Registration process is different than specification because
+        // it does not work correctly with current routes definition method
+        // https://hapijs.com/tutorials/auth?lang=en_US
+        HttpServerTokenAuth.register(hapiServer, this._authProvider);
 
         // Define Hapi Event Listeners
         this.defineEventListeners(hapiServer);

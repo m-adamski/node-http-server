@@ -2,18 +2,24 @@ import * as Hapi from "hapi";
 import {Router, Route} from "../router/index";
 import {Config} from "../config/index";
 import {Debug} from "../debug/index";
+import {AuthProvider} from "../../providers/index";
 
 export class HttpServer {
 
     protected _hapiServer: Hapi.Server;
+    private _authProvider: AuthProvider;
     private _debugService: Debug;
     private _configService: Config;
     private _routerService: Router;
 
-    constructor(httpServerConfig: HttpServerConfig, debugService: Debug, configService: Config);
+    constructor(httpServerConfig: HttpServerConfig, authProvider: AuthProvider, debugService: Debug, configService: Config);
     startServer(): void;
     registerRoute(route: Route): void;
     routerService(): Router;
+}
+
+export class HttpServerTokenAuth {
+    public static register(hapiServer: Hapi.Server, authProvider: AuthProvider): void;
 }
 
 export class HttpServerConfig implements Hapi.IServerConnectionOptions {

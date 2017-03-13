@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Hapi = require("hapi");
 var router_1 = require("../../router/lib/router");
+var http_server_auth_1 = require("./http-server-auth");
 var HttpServer = (function () {
-    function HttpServer(httpServerConfig, debugService, configService) {
+    function HttpServer(httpServerConfig, authProvider, debugService, configService) {
         this._hapiServer = this.initHapi(httpServerConfig);
+        this._authProvider = authProvider;
         this._debugService = debugService;
         this._configService = configService;
         this._routerService = new router_1.Router(this, debugService, configService);
@@ -49,6 +51,7 @@ var HttpServer = (function () {
     HttpServer.prototype.initHapi = function (httpServerConfig) {
         var hapiServer = new Hapi.Server();
         hapiServer.connection(httpServerConfig);
+        http_server_auth_1.HttpServerTokenAuth.register(hapiServer, this._authProvider);
         this.defineEventListeners(hapiServer);
         return hapiServer;
     };

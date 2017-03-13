@@ -58,8 +58,8 @@ ajv-keywords@^1.1.1:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
 
 ajv@^4.7.0, ajv@^4.9.1:
-  version "4.11.4"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.4.tgz#ebf3a55d4b132ea60ff5847ae85d2ef069960b45"
+  version "4.11.5"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.5.tgz#b6ee74657b993a01dce44b7944d56f485828d5bd"
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
@@ -219,7 +219,7 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-boom@4.x.x, boom@^4.2.0:
+boom@4.x.x, boom@^4.1.0, boom@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/boom/-/boom-4.2.0.tgz#c1a74174b11fbba223f6162d4fd8851a1b82a536"
   dependencies:
@@ -760,6 +760,14 @@ graceful-fs@^4.1.2:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
+hapi-auth-bearer-token@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/hapi-auth-bearer-token/-/hapi-auth-bearer-token-5.0.0.tgz#0129888ed53d06ef1fe7bc7bbb43eabcc9977d51"
+  dependencies:
+    boom "^4.1.0"
+    hoek "^4.1.0"
+    joi "^10.0.0"
+
 hapi@^16.1.0:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/hapi/-/hapi-16.1.0.tgz#419dd86347588821eb5a0a5f493bce019802d33b"
@@ -837,7 +845,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoek@4.x.x:
+hoek@4.x.x, hoek@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.1.0.tgz#4a4557460f69842ed463aa00628cc26d2683afa7"
 
@@ -911,8 +919,8 @@ is-binary-path@^1.0.0:
     binary-extensions "^1.0.0"
 
 is-buffer@^1.0.2:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.4.tgz#cfc86ccd5dc5a52fa80489111c6920c457e2d98b"
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.5.tgz#1f3b26ef613b214b88cbca23cc6c01d87961eecc"
 
 is-builtin-module@^1.0.0:
   version "1.0.0"
@@ -1000,7 +1008,7 @@ jodid25519@^1.0.0:
   dependencies:
     jsbn "~0.1.0"
 
-joi@10.x.x:
+joi@10.x.x, joi@^10.0.0:
   version "10.2.2"
   resolved "https://registry.yarnpkg.com/joi/-/joi-10.2.2.tgz#dc5a792b7b4c6fffa562242a95b55d9d3f077e24"
   dependencies:
@@ -1818,8 +1826,8 @@ typescript@^2.2.1:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.1.tgz#4862b662b988a4c8ff691cc7969622d24db76ae9"
 
 uglify-js@^2.7.5:
-  version "2.8.11"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.11.tgz#11a51c43d810b47bc00aee4d512cb3947ddd1ac4"
+  version "2.8.12"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.12.tgz#8a50f5d482243650b7108f6080aa3a6afe2a6c55"
   dependencies:
     source-map "~0.5.1"
     uglify-to-browserify "~1.0.0"
