@@ -1,8 +1,10 @@
 export class Config {
+
     protected _configFile: string;
     protected _configContent: Object;
+    protected _configBranchesSeparator: string;
 
     constructor(configFile: string);
-    public get($propertyPath?: string): any;
-    public has($propertyPath: string): boolean;
+    get($propertyPath?: string): any;
+    has($propertyPath: string): boolean;
 }

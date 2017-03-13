@@ -1,7 +1,7 @@
 var pathModule = require('path');
 
 module.exports = {
-    target: 'async-node',
+    target: 'node',
     entry: './src/app/app.ts',
     output: {
         path: pathModule.resolve(__dirname, 'dist'),

@@ -1,60 +1,75 @@
-import * as Hapi from "hapi";
-export class HttpServer {
-    constructor(hapiConfig) {
-        this._hapiServer = this.initHapi(hapiConfig);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Hapi = require("hapi");
+var router_1 = require("../../router/lib/router");
+var HttpServer = (function () {
+    function HttpServer(httpServerConfig, debugService, configService) {
+        this._hapiServer = this.initHapi(httpServerConfig);
+        this._debugService = debugService;
+        this._configService = configService;
+        this._routerService = new router_1.Router(this, debugService, configService);
     }
-    set debugService(value) {
-        this._debugService = value;
-    }
-    startServer() {
-        this._hapiServer.start((error) => {
+    HttpServer.prototype.startServer = function () {
+        var _this = this;
+        this._hapiServer.start(function (error) {
             if (error) {
                 throw error;
             }
-            this.logMessage('info', `Server running at: ${this._hapiServer.info.uri}`);
+            _this.logMessage("info", "Server running at: " + _this._hapiServer.info.uri);
         });
-    }
-    registerRoute(hapiRoute) {
-        let matchStatus = false;
-        if (!Array.isArray(hapiRoute.method)) {
-            matchStatus = (this._hapiServer.match(hapiRoute.method, hapiRoute.path) != null);
+    };
+    HttpServer.prototype.registerRoute = function (route) {
+        var _this = this;
+        var matchStatus = false;
+        if (!Array.isArray(route.method)) {
+            matchStatus = (this._hapiServer.match(route.method, route.path) != null);
         }
         else {
-            hapiRoute.method.forEach((method) => {
-                if (this._hapiServer.match(method, hapiRoute.path) != null) {
+            route.method.forEach(function (method) {
+                if (_this._hapiServer.match(method, route.path) != null) {
                     matchStatus = true;
                     return false;
                 }
             });
         }
         if (!matchStatus) {
-            this._hapiServer.route(hapiRoute);
+            this._hapiServer.route(route);
         }
         else {
-            this.logMessage('error', `Route [${hapiRoute.method}] ${hapiRoute.path} is already registered`);
+            this.logMessage("error", "Route [" + route.method + "] " + route.path + " is already registered");
         }
-    }
-    initHapi(hapiConfig) {
-        let hapiServer = new Hapi.Server();
-        hapiServer.connection(hapiConfig);
+    };
+    Object.defineProperty(HttpServer.prototype, "routerService", {
+        get: function () {
+            return this._routerService;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    HttpServer.prototype.initHapi = function (httpServerConfig) {
+        var hapiServer = new Hapi.Server();
+        hapiServer.connection(httpServerConfig);
         this.defineEventListeners(hapiServer);
         return hapiServer;
-    }
-    defineEventListeners(hapiServer) {
-        hapiServer.on('request', (request) => {
-            this.logMessage('info', `New request: [${request.info.remoteAddress}] [${request.method.toUpperCase()}] ${request.path}`);
+    };
+    HttpServer.prototype.defineEventListeners = function (hapiServer) {
+        var _this = this;
+        hapiServer.on("request", function (request) {
+            _this.logMessage("info", "New request: [" + request.info.remoteAddress + "] [" + request.method.toUpperCase() + "] " + request.path);
         });
-        hapiServer.on('route', (route) => {
-            this.logMessage('info', `New route added: [${route.method.toUpperCase()}] ${route.path}`);
+        hapiServer.on("route", function (route) {
+            _this.logMessage("info", "New route added: [" + route.method.toUpperCase() + "] " + route.path);
         });
-        hapiServer.on('request-error', (request, err) => {
-            this.logMessage('error', `Error response (500) sent for request: [${request.info.remoteAddress}] [${request.method.toUpperCase()}] ${request.path} because: ${err.message}`);
+        hapiServer.on("request-error", function (request, err) {
+            _this.logMessage("error", "Error response (500) sent for request: [" + request.info.remoteAddress + "] [" + request.method.toUpperCase() + "] " + request.path + " because: " + err.message);
         });
-    }
-    logMessage(logLevel, logMessage) {
+    };
+    HttpServer.prototype.logMessage = function (logLevel, logMessage) {
         if (this._debugService) {
-            this._debugService.log(logLevel, logMessage, 'HTTP Server');
+            this._debugService.log(logLevel, logMessage, "HTTP Server");
         }
-    }
-}
+    };
+    return HttpServer;
+}());
+exports.HttpServer = HttpServer;
 //# sourceMappingURL=http-server.js.map

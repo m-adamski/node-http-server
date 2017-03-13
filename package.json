@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "@types/boom": "^0.0.33",
+        "@types/es6-collections": "^0.5.29",
         "@types/hapi": "^16.0.0",
         "@types/js-yaml": "^3.5.29",
         "@types/node": "^7.0.8",
