@@ -5,10 +5,10 @@ var router_1 = require("../../router/lib/router");
 var http_server_auth_1 = require("./http-server-auth");
 var HttpServer = (function () {
     function HttpServer(httpServerConfig, authProvider, debugService, configService) {
-        this._hapiServer = this.initHapi(httpServerConfig);
         this._authProvider = authProvider;
         this._debugService = debugService;
         this._configService = configService;
+        this._hapiServer = this.initHapi(httpServerConfig);
         this._routerService = new router_1.Router(this, debugService, configService);
     }
     HttpServer.prototype.startServer = function () {

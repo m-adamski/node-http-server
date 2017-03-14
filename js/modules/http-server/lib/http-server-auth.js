@@ -10,7 +10,7 @@ var HttpServerTokenAuth = (function () {
                 authenticate: function (request, reply) {
                     var headerAuthorization = request.raw.req.headers.authorization;
                     if (headerAuthorization) {
-                        var authorizationToken = this.getToken(headerAuthorization);
+                        var authorizationToken = HttpServerTokenAuth.getToken(headerAuthorization);
                         if (authorizationToken && authProvider.hasToken(authorizationToken)) {
                             return reply.continue({ credentials: true });
                         }

@@ -25,13 +25,13 @@ export class HttpServer {
      */
     constructor(httpServerConfig: HttpServerConfig, authProvider: AuthProvider, debugService: Debug, configService: Config) {
 
-        // Init Hapi Server
-        this._hapiServer = this.initHapi(httpServerConfig);
-
         // Assign variables
         this._authProvider = authProvider;
         this._debugService = debugService;
         this._configService = configService;
+
+        // Init Hapi Server
+        this._hapiServer = this.initHapi(httpServerConfig);
 
         // Init Router
         this._routerService = new Router(this, debugService, configService);

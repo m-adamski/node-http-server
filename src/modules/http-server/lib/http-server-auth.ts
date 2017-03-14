@@ -23,7 +23,7 @@ export class HttpServerTokenAuth {
 
                     if (headerAuthorization) {
 
-                        let authorizationToken = this.getToken(headerAuthorization);
+                        let authorizationToken = HttpServerTokenAuth.getToken(headerAuthorization);
 
                         if (authorizationToken && authProvider.hasToken(authorizationToken)) {
                             return reply.continue({credentials: true});
