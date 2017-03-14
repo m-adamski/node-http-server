@@ -5,7 +5,7 @@ import {HttpServerConfig} from "./http-server-config";
 import {Config} from "../../config/lib/config";
 import {Router} from "../../router/lib/router";
 import {HttpServerTokenAuth} from "./http-server-auth";
-import {AuthProvider} from "../../../providers/auth/auth-provider";
+import {AuthProvider} from "../../provider/lib/auth-provider";
 
 export class HttpServer {
 

@@ -2,7 +2,7 @@ import * as Hapi from "hapi";
 import {Router, Route} from "../router/index";
 import {Config} from "../config/index";
 import {Debug} from "../debug/index";
-import {AuthProvider} from "../../providers/index";
+import {AuthProvider} from "../provider/index";
 
 export class HttpServer {
 

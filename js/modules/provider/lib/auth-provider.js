@@ -1,4 +1,4 @@
-import { Provider } from "../../modules/provider/lib/provider";
+import { Provider } from "./provider";
 export class AuthProvider extends Provider {
     hasToken(token) {
         let response = false;
