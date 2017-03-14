@@ -121,14 +121,14 @@ let configService = new Config("./src/config.yml");
 
 // Initialize Debug Service & add Console transporter
 let debugService = new Debug(true);
-debugService.addTransporter(new Winston.transports.Console({ colorize: true }));
+debugService.addTransporter(Winston.transports.Console, { colorize: true });
 
 // Initialize Http Server
 let httpServer = new HttpServer({ host: "localhost", port: 3000 }, new CustomAuthProvider(), debugService, configService);
 httpServer.startServer();
 
 // Register Controllers
-httpServer.routerService().registerController(new DashboardController());
+httpServer.routerService.registerController(new DashboardController());
 ```
 
 ### Webpack & Typescript configs
@@ -160,9 +160,10 @@ tsconfig.json
 ```json
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "moduleResolution": "node",
         "noImplicitAny": false,
         "removeComments": true,
         "preserveConstEnums": true,
