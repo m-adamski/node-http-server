@@ -15,11 +15,11 @@ export class HttpServer {
     constructor(httpServerConfig: HttpServerConfig, authProvider: AuthProvider, debugService: Debug, configService: Config);
     startServer(): void;
     registerRoute(route: Route): void;
-    routerService(): Router;
+    routerService: Router;
 }
 
 export class HttpServerTokenAuth {
-    public static register(hapiServer: Hapi.Server, authProvider: AuthProvider): void;
+    static register(hapiServer: Hapi.Server, authProvider: AuthProvider): void;
 }
 
 export class HttpServerConfig implements Hapi.IServerConnectionOptions {

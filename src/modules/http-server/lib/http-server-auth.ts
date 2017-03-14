@@ -1,6 +1,6 @@
 import * as Hapi from "hapi";
 import * as Boom from "boom";
-import {AuthProvider} from "../../../providers/auth-provider";
+import {AuthProvider} from "../../../providers/auth/auth-provider";
 
 export class HttpServerTokenAuth {
 

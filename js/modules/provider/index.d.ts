@@ -1,4 +1,3 @@
 export class Provider {
-
-    protected _dataCollection: Set<any>;
+    _dataCollection: Set<any>;
 }
