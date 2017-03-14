@@ -1,39 +1,36 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Fs = require("fs");
-var Yaml = require("js-yaml");
-var Config = (function () {
-    function Config(configFile) {
+import * as Fs from "fs";
+import * as Yaml from "js-yaml";
+export class Config {
+    constructor(configFile) {
         this._configBranchesSeparator = ".";
         this._configFile = configFile;
         this._configContent = this.readConfig(configFile);
     }
-    Config.prototype.get = function ($propertyPath) {
+    get($propertyPath) {
         if ($propertyPath) {
             return this.readProperty($propertyPath);
         }
         else {
             return this._configContent;
         }
-    };
-    Config.prototype.has = function ($propertyPath) {
+    }
+    has($propertyPath) {
         return this.readProperty($propertyPath, true);
-    };
-    Config.prototype.scanConfigTree = function ($propertyName, $propertyBranch) {
+    }
+    scanConfigTree($propertyName, $propertyBranch) {
         if ($propertyBranch[$propertyName]) {
             return $propertyBranch[$propertyName];
         }
         throw new Error('Property with specified name does not exist');
-    };
-    Config.prototype.readProperty = function ($propertyPath, $returnBool) {
-        var _this = this;
-        var returnBool = $returnBool || false;
-        var propertyPathArray = $propertyPath.split(this._configBranchesSeparator);
-        var currentProperty = this._configContent;
+    }
+    readProperty($propertyPath, $returnBool) {
+        let returnBool = $returnBool || false;
+        let propertyPathArray = $propertyPath.split(this._configBranchesSeparator);
+        let currentProperty = this._configContent;
         if (propertyPathArray.length > 0) {
-            propertyPathArray.forEach(function (propertyBranch) {
+            propertyPathArray.forEach((propertyBranch) => {
                 try {
-                    currentProperty = _this.scanConfigTree(propertyBranch, currentProperty);
+                    currentProperty = this.scanConfigTree(propertyBranch, currentProperty);
                 }
                 catch (error) {
                     currentProperty = undefined;
@@ -42,14 +39,12 @@ var Config = (function () {
             });
         }
         return (returnBool) ? (currentProperty != undefined) : currentProperty;
-    };
-    Config.prototype.readConfig = function (configFile) {
+    }
+    readConfig(configFile) {
         if (Fs.existsSync(configFile)) {
             return Yaml.safeLoad(Fs.readFileSync(configFile, 'utf8'));
         }
         throw new ReferenceError('Config File does not exist.');
-    };
-    return Config;
-}());
-exports.Config = Config;
+    }
+}
 //# sourceMappingURL=config.js.map

@@ -1,5 +1,2 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var provider_1 = require("./lib/provider");
-exports.Provider = provider_1.Provider;
+export { Provider } from "./lib/provider";
 //# sourceMappingURL=index.js.map

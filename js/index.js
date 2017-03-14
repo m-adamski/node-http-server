@@ -1,12 +1,7 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./modules/http-server/index"));
-__export(require("./modules/config/index"));
-__export(require("./modules/debug/index"));
-__export(require("./modules/router/index"));
-__export(require("./modules/provider/index"));
-__export(require("./modules/controller/index"));
+export * from "./modules/http-server/index";
+export * from "./modules/config/index";
+export * from "./modules/debug/index";
+export * from "./modules/router/index";
+export * from "./modules/provider/index";
+export * from "./modules/controller/index";
 //# sourceMappingURL=index.js.map

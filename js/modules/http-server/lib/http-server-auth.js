@@ -1,16 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Boom = require("boom");
-var HttpServerTokenAuth = (function () {
-    function HttpServerTokenAuth() {
-    }
-    HttpServerTokenAuth.register = function (hapiServer, authProvider) {
-        hapiServer.auth.scheme("token", function (server, options) {
+import * as Boom from "boom";
+export class HttpServerTokenAuth {
+    static register(hapiServer, authProvider) {
+        hapiServer.auth.scheme("token", (server, options) => {
             return {
                 authenticate: function (request, reply) {
-                    var headerAuthorization = request.raw.req.headers.authorization;
+                    let headerAuthorization = request.raw.req.headers.authorization;
                     if (headerAuthorization) {
-                        var authorizationToken = HttpServerTokenAuth.getToken(headerAuthorization);
+                        let authorizationToken = HttpServerTokenAuth.getToken(headerAuthorization);
                         if (authorizationToken && authProvider.hasToken(authorizationToken)) {
                             return reply.continue({ credentials: true });
                         }
@@ -20,13 +16,11 @@ var HttpServerTokenAuth = (function () {
             };
         });
         hapiServer.auth.strategy("token", "token");
-    };
-    HttpServerTokenAuth.getToken = function (headerAuthorization) {
-        var tokenRegex = /^Token (.*)$/g;
-        var tokenExec = tokenRegex.exec(headerAuthorization);
+    }
+    static getToken(headerAuthorization) {
+        let tokenRegex = /^Token (.*)$/g;
+        let tokenExec = tokenRegex.exec(headerAuthorization);
         return (tokenExec) ? tokenExec[1] : false;
-    };
-    return HttpServerTokenAuth;
-}());
-exports.HttpServerTokenAuth = HttpServerTokenAuth;
+    }
+}
 //# sourceMappingURL=http-server-auth.js.map

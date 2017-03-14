@@ -1,5 +1,2 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var controller_1 = require("./lib/controller");
-exports.Controller = controller_1.Controller;
+export { Controller } from "./lib/controller";
 //# sourceMappingURL=index.js.map

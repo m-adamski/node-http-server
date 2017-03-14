@@ -1,41 +1,21 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Controller = (function () {
-    function Controller() {
+export class Controller {
+    constructor() {
         this._routesCollection = new Set();
     }
-    Controller.prototype.registerRoute = function (route) {
+    registerRoute(route) {
         this._routesCollection.add(route);
-    };
-    Object.defineProperty(Controller.prototype, "controllerName", {
-        get: function () {
-            return this._controllerName;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Controller.prototype, "routesCollection", {
-        get: function () {
-            return this._routesCollection;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Controller.prototype, "debugService", {
-        set: function (value) {
-            this._debugService = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Controller.prototype, "configService", {
-        set: function (value) {
-            this._configService = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Controller;
-}());
-exports.Controller = Controller;
+    }
+    get controllerName() {
+        return this._controllerName;
+    }
+    get routesCollection() {
+        return this._routesCollection;
+    }
+    set debugService(value) {
+        this._debugService = value;
+    }
+    set configService(value) {
+        this._configService = value;
+    }
+}
 //# sourceMappingURL=controller.js.map
